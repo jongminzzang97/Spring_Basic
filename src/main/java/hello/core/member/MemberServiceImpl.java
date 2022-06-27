@@ -5,7 +5,11 @@ public class MemberServiceImpl implements MemberService {
 
     // 이 부분에서 MemoriMemberRepository를 직접 할당한다는 점에서 좋지 못하다.
     // 후에 변경이 있다면 코드를 직접수정해야함
-    private final MemberRepository memberRepository = new MemoriMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public void join(Member member) {

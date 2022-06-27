@@ -9,10 +9,13 @@ import hello.core.member.MemoriMemberRepository;
 
 public class OrderServiceImpl implements OrderService {
 
-    private final MemberRepository memberRepository = new MemoriMemberRepository();
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
 
-    // 마친가지로 여기서 코드를 수정을 통해 할인정책을 바꿔야하는 것은 불편하다.
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long MemberId, String itemName, int itemPrice) {
